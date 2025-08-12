@@ -31,18 +31,18 @@ pip install -r requirements.txt
 
 The full dataset couldn't be uploaded due to storage limitations; therefore, for the training process you are requested to manually download the dataset:
 
-1. Download the dataset ZIP file from this link:
-   [Download dataset](https://technionmail-my.sharepoint.com/:u:/g/personal/lilach_biton_campus_technion_ac_il/EYEffRkWayVBrOz1VhlrnF0BME8qdX9l23LGALs23hO4pw?e=d1Akxb&download=1)
+1. Download the dataset ZIP file from the Kagle competition:
+   [Download dataset](https://www.kaggle.com/competitions/lyft-motion-prediction-autonomous-vehicles/data)
 
 2. Extract the contents into the project folder under:
-   `./lyft_data`
+   `./data`
 
 Make sure the extracted data is accessible at this path before running any scripts.
 
 * **Running on Google Colab:**
 
 For Google Colab users, simply run:
-
+ NOT WORKING YET - TODO
 ```python
 !python setup_colab.py
 ```

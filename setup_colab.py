@@ -1,4 +1,4 @@
-# setup_colab.py
+# NOT WORKING YET
 import os
 import subprocess
 
@@ -29,18 +29,6 @@ def download_data_if_needed(data_dir, onedrive_url):
     print(f"Dataset downloaded and extracted to '{data_dir}'")
 
 def main():
-    repo_name = "LyftTrajectoryPrediction"
-    repo_url = f"https://github.com/Lilach-Biton/{repo_name}.git"
-
-    if not os.path.exists(repo_name):
-        print(f"Cloning repo from {repo_url}...")
-        os.system(f"git clone {repo_url}")
-    else:
-        print(f"Repo '{repo_name}' already exists. Skipping clone.")
-
-    os.chdir(repo_name)
-    print(f"Changed directory to {os.getcwd()}")
-
     if os.path.exists("requirements.txt"):
         print("Installing additional requirements from requirements.txt...")
         os.system("pip install -r requirements.txt")
