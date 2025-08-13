@@ -36,6 +36,7 @@ class BaselineRes50Model(nn.Module):
         # Forward pass
         outputs = self.model(inputs).reshape(targets.shape)
         loss = criterion(outputs, targets)
+        # loss = criterion(outputs, targets, target_availabilities)
         # not all the output steps are valid, but we can filter them out from the loss using availabilities
         loss = loss * target_availabilities
         loss = loss.mean()

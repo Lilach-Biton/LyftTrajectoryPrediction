@@ -1,0 +1,62 @@
+# Config format schema number
+format_version: 4
+
+###################
+## Model options
+model_params:
+  model_architecture: "vit_b_16" 
+
+  future_num_frames: 50
+  step_time: 0.1
+  render_ego_history: True
+  future_delta_time: 0.1
+  future_step_size: 1
+  history_delta_time: 0.1
+  history_num_frames: 10
+  history_step_size: 1
+
+###################
+## Input raster parameters
+raster_params:
+  # raster image size [pixels]
+  raster_size:
+    - 224
+    - 224
+  # raster's spatial resolution [meters per pixel]
+  pixel_size:
+    - 0.5
+    - 0.5
+  ego_center:
+    - 0.25
+    - 0.5
+  map_type: "py_semantic"
+
+  satellite_map_key: "aerial_map/aerial_map.png"
+  semantic_map_key: "semantic_map/semantic_map.pb"
+  dataset_meta_key: "meta.json"
+
+  filter_agents_threshold: 0.5
+  disable_traffic_light_faces: False
+  set_origin_to_bottom: True
+
+###################
+## Data loader options
+train_data_loader:
+  key: "scenes/sample.zarr"
+  batch_size: 12
+  shuffle: True
+  num_workers: 16
+
+val_data_loader:
+  key: "scenes/sample.zarr"
+  batch_size: 12
+  shuffle: False
+  num_workers: 16
+
+###################
+## Train params
+train_params:
+  checkpoint_every_n_steps: 10000
+  max_num_steps: 500
+  eval_every_n_steps: 10000
+  learning_rate: 0.001
