@@ -57,12 +57,17 @@ class Trainer:
         return losses_train
 
     def train_and_validate(self, val_loader, checkpoint=None):
-        train_size = len(self.train_loader)
         val_size = len(val_loader)
-        train_val_ratio = np.ceil(train_size / val_size)
+        max_steps = self.cfg["train_params"]["max_num_steps"]
+
+        if max_steps < val_size:
+            train_val_ratio = 1
+        else:
+            train_val_ratio = np.ceil(max_steps / val_size)
+        
         tr_it = iter(self.train_loader)
         val_it = iter(val_loader)
-        progress_bar = tqdm(range(self.cfg["train_params"]["max_num_steps"]))
+        progress_bar = tqdm(range(max_steps))
         losses_train = []
         losses_val = []
 
@@ -88,8 +93,17 @@ class Trainer:
             # Validation step
             if iteration % train_val_ratio == 0:
                 self.model.eval()
+                
+                try:
+                    data = next(val_it)
+                except StopIteration:
+                    val_it = iter(val_loader)
+                    data = next(val_it)
+                
+                torch.set_grad_enabled(False)
+
                 with torch.no_grad():
-                    val_loss, _ = self.model.forward_pass(next(val_it), self.device, self.criterion)
+                    val_loss, _ = self.model.forward_pass(data, self.device, self.criterion)
                     losses_val.append(val_loss.item())
                     print({"val_loss": val_loss.item(), "val_loss(avg)": np.mean(losses_val)})
 
