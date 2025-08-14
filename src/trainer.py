@@ -85,7 +85,7 @@ class Trainer:
             losses_val_epoch.append(running_val_loss)
 
             self.scheduler.step(running_val_loss)
-            current_lr = self.scheduler.get_last_lr()[0]
+            current_lr = self.optimizer.param_groups[0]['lr']
 
             self.writer.add_scalar("Learning Rate", current_lr, epoch)
             self.writer.add_scalar("Validation Loss", running_val_loss, epoch)
