@@ -4,7 +4,7 @@ import torch.nn as nn
 import torch.optim as optim
 from tqdm import tqdm
 import numpy as np
-from src.utils import pytorch_neg_multi_log_likelihood_single
+
 from torch.utils.tensorboard import SummaryWriter
 
 class Trainer:
@@ -19,7 +19,7 @@ class Trainer:
 
         # Loss and Optimizer
         self.criterion = nn.MSELoss()
-        # self.criterion = pytorch_neg_multi_log_likelihood_single
+        # Optimizer
         self.optimizer = optim.Adam(self.model.parameters(), lr=cfg["train_params"]["learning_rate"])
         # Scheduler
         self.scheduler = torch.optim.lr_scheduler.ReduceLROnPlateau(self.optimizer, mode='min', factor=0.2, patience=1, threshold=0.001)
@@ -101,15 +101,6 @@ class Trainer:
         return losses_train, losses_val_epoch, losses_train_epoch
 
 def train(self, checkpoint=None):
-        # for epoch in range(self.cfg["train_params"]["max_num_epochs"]):
-        #     self.model.train()
-        #     for batch in self.train_loader:
-        #         self.optimizer.zero_grad()
-        #         outputs = self.model(batch["image"].to(self.device))
-        #         loss = self.criterion(outputs, batch["target_positions"].to(self.device))
-        #         loss.backward()
-        #         self.optimizer.step()
-        #     torch.save(self.model.state_dict(), os.path.join(self.exp_dir, f"epoch_{epoch}.pth"))
         tr_it = iter(self.train_loader)
         progress_bar = tqdm(range(self.cfg["train_params"]["max_num_steps"]))
         losses_train = []

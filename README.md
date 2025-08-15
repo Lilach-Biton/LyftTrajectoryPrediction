@@ -39,16 +39,6 @@ The full dataset couldn't be uploaded due to storage limitations; therefore, for
 
 Make sure the extracted data is accessible at this path before running any scripts.
 
-* **Running on Google Colab:**
-
-For Google Colab users, simply run:
- NOT WORKING YET - TODO
-```python
-!python setup_colab.py
-```
-
-This script will clone the repo, install dependencies, download and extract the dataset automatically, and create necessary directories.
-
 ---
 
 ## License & Credits
