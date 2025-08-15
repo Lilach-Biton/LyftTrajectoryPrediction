@@ -1,1 +1,4 @@
 -e ./l5kit/l5kit[dev]
+tensorboard
+timm --no-deps
+huggingface_hub --no-deps
